@@ -18,6 +18,17 @@ group = 'fincar'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+jar {
+    manifest {
+        attributes  'Title': 'fincar_web', 'Version': version, 'Main-Class': mainClassName
+    }
+    archiveName 'fincar_web.jar'
+    dependsOn configurations.runtime
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
+}
+
 repositories {
     mavenCentral()
 }
